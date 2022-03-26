@@ -1,6 +1,6 @@
 # general mathematical calculations
 import numpy as np
-import cv2 as cv
+from copy import copy as cpy
 
 # function to convert decimal number to binary
 def dec_to_bin(val):
@@ -8,7 +8,7 @@ def dec_to_bin(val):
 
 # function to convert binary number to decimal
 def bin_to_dec(val):
-    return int(val, 2)
+    return int(str(val), 2)
 
 # function to generate random number using arnold cat map formula
 def arnold_cat_map(u, a):
@@ -35,29 +35,15 @@ def get_random_matrix(u, a, b, row, column):
 def xor_matrix(matrix1, matrix2):
     return np.bitwise_xor(matrix1, matrix2)
 
-# bitplane decompostition
-def bitplane_decomposition(original, height, width):
-    ret, bitplane8 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane7 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane6 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane5 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane4 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane3 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane2 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane1 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    bitplanes = [bitplane8, bitplane7, bitplane6, bitplane5, bitplane4, bitplane3, bitplane2, bitplane1]
-
-    for a in range(8):
-        for i in range(height):
-            for j in range(width):
-                bin_val = dec_to_bin(original[i,j])
-                if str(bin_val)[a] == '1':
-                    bitplanes[a][i,j] = 1
-                else:
-                    bitplanes[a][i,j] = 0
-
-    return bitplane8, bitplane7, bitplane6, bitplane5, bitplane4, bitplane3, bitplane2, bitplane1
+# convert 1 in a matrix to 255
+def convert_to_255(img):
+    _img = cpy(img)
+    _img[_img==1] = 255
+    return _img
 
 # bitplane composition
-def bitplane_composition(bitplanes, height, width):
-    pass
+def bin_to_gray(img, height, width):
+    for i in range(height):
+        for j in range(width):
+            img[i][j] = bin_to_dec(img[i][j])
+    return img
