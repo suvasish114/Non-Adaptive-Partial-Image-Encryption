@@ -1,6 +1,7 @@
 # encryption related functions
 import cv2 as cv
 from calculation import *
+import numpy as np
 
 # bitplane decompostition
 # return: a list of 8 bitplane images from MSB to LSB
@@ -23,7 +24,7 @@ def bitplane_decomposition(original, height, width):
                     bitplanes[a][i,j] = 1
                 else:
                     bitplanes[a][i,j] = 0
-    return bitplanes
+    return np.array(bitplanes)
 
 
 # compose image from bitplane images and cipher images
@@ -49,4 +50,4 @@ def cipher_image_composition(bitplane_images, height, width):
     for i in range(height):
         for j in range(width):
             final[i][j] = bin_to_dec(final[i][j])
-    return final
+    return np.array(final, dtype=np.uint8)

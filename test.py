@@ -19,8 +19,7 @@ if __name__ == '__main__':
     # mat_xor = xor_matrix(mat1, mat2)
     # for i in range(5):
     #     print(mat_xor[i])
-
-
+        
     # for i in range(10):
     #     x,y,mat = get_random_matrix(u,x,y,2,2)
     #     print('x={}, y={}'.format(x,y))
