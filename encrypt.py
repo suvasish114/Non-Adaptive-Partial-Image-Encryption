@@ -3,8 +3,19 @@ import cv2 as cv
 from calculation import *
 import numpy as np
 
-# bitplane decompostition
-# return: a list of 8 bitplane images from MSB to LSB
+'''
+Params
+    original: 2D matrix
+        original photograph in grayscale mode
+    height: int
+        height of the matrix
+    width: int
+        width of the matrix
+
+Returns
+    bitplanes: list of 2D matrix
+        8 bitplane matrix from MSB to LSB
+'''
 def bitplane_decomposition(original, height, width):
     ret, bitplane8 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
     ret, bitplane7 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
