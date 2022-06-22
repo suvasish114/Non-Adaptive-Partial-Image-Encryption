@@ -1,42 +1,28 @@
 # encryption related functions
+
 import cv2 as cv
-from calculation import *
+from conversion import *
 import numpy as np
 
-'''
-Params
-    original: 2D matrix
-        original photograph in grayscale mode
-    height: int
-        height of the matrix
-    width: int
-        width of the matrix
+class Encryption:
+    def __init__(self):
+        pass
 
-Returns
-    bitplanes: list of 2D matrix
-        8 bitplane matrix from MSB to LSB
-'''
-def bitplane_decomposition(original, height, width):
-    ret, bitplane8 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane7 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane6 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane5 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane4 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane3 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane2 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    ret, bitplane1 = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
-    bitplanes = [bitplane8, bitplane7, bitplane6, bitplane5, bitplane4, bitplane3, bitplane2, bitplane1]
+    def bitplane_decomposition(self, original, height, width):          # bitplane decomposition from the original image
+        bitplanes = []
+        for i in range(8):
+            ret, bitplane = cv.threshold(original, 127, 255, cv.THRESH_BINARY)
+            bitplanes.append(bitplane)
 
-    for a in range(8):
-        for i in range(height):
-            for j in range(width):
-                bin_val = dec_to_bin(original[i,j])
-                if str(bin_val)[a] == '1':
-                    bitplanes[a][i,j] = 1
-                else:
-                    bitplanes[a][i,j] = 0
-    return np.array(bitplanes)
-
+        for i in range(8):
+            for a in range(height):
+                for b in range(width):
+                    bin_val = dec_to_bin(original[a][b])
+                    if str(bin_val)[i] == '1':
+                        bitplanes[i][a][b] = 1
+                    else:
+                        bitplanes[i][a][b] = 0
+        return np.array(bitplanes, dtype=np.uint8)
 
 # compose image from bitplane images and cipher images
 def cipher_image_composition(bitplane_images, height, width):
