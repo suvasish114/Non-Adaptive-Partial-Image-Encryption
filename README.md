@@ -4,6 +4,6 @@
 
 # Non Adaptive Partial Image Encryption
 
-This project is proposed by `Barrackpore Rastraguru Surendranath College`'s department of computer science undergraduates under `Dr. Sukalyan Som`'s mentorship on `adaptive partial image encryption of grayscale image based on chaos`.
+Implementation of non adaptive image encryption method by `BRSNC` department of computer science undergraduates under `Dr. Sukalyan Som`'s mentorship on his novel reserch on `adaptive partial image encryption of grayscale image based on chaos`.
 
 **Currently this project is under development.**

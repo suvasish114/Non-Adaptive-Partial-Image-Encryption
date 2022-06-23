@@ -1,3 +1,4 @@
+from math import log10, sqrt
 import random
 import numpy as np
 
@@ -22,4 +23,13 @@ class Noise:
             img[x_coord][y_coord] = 0
 
         return np.array(img, dtype=np.uint8)
+    
+    def PSNR(self, original, compressed):
+        mse = np.mean((original - compressed) ** 2)
+        if(mse == 0):   # MSE is zero means no noise is present in the signal .
+            return 100
+        max_pixel = 255.0
+        psnr = 20 * log10(max_pixel / sqrt(mse))
+        return psnr
+
  
