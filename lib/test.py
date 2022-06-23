@@ -1,5 +1,5 @@
 # testing
-from calculation import *
+from conversion import *
 import numpy as np
 
 x = 0.78

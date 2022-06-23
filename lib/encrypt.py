@@ -1,7 +1,7 @@
 # encryption related functions
 
 import cv2 as cv
-from conversion import *
+from .conversion import *
 import numpy as np
 
 class Encryption:

@@ -2,7 +2,7 @@
 # Credit: paper proposed by Narendra K Pareek, Vinod Patidar, and Krishan K Sud, 2007
 # Author: suvasish das (misuvasish114@gmail.com)
 
-from conversion import *
+from .conversion import *
 import numpy as np
 
 class PRNG:                                   # Pseudo random number generator
