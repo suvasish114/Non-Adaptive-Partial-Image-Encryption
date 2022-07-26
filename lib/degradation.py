@@ -22,28 +22,6 @@ class Degreadation:
                 if x >= 0 and x <= self.width-1 and y >= 0  and y <= self.height-1:   # if pixel range inside image matrix
                     list.append(int(pow(self.img[x][y],order_of_filter)))
         return list 
-
-    # def artihmaticMean(self):
-    #     ''' arithmatic mean filter '''
-    #     degradated_img = self.img.copy()
-    #     for a in range(self.width):      # column
-    #         for b in range(self.height):     # row
-    #             degradated_img[a][b] =  self._meanNeighbour(a,b)
-    #     return np.array(degradated_img, dtype=np.uint8)
-
-    # def geomatricMean(self):
-    #     pass 
-    # def harmonicMean(self):
-    #     pass 
-
-    # def contraHarmonicMean(self, Q=1):
-    #     # BUG: ValueError: cannot convert float NaN to integer
-    #     degradated_img = self.img.copy()
-    #     for a in range(self.width):
-    #         for b in range(self.height):
-    #             degradated_img[a][b] = int(self._meanNeighbour(a,b,Q+1) / self._meanNeighbour(a,b,Q))       # for paper noise
-    #             degradated_img[a][b] = int(self._meanNeighbour(a,b,-Q+1) / self._meanNeighbour(a,b,-Q))     # for salt noise
-    #     return degradated_img
     
     def medianFilter(self):
         ''' median filter '''
